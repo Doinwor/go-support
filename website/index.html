@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GO Support — центр обращений</title>
+  <meta name="description" content="Публичная лента обращений GO Support: поиск, фильтры по проектам и статусам, ответы администрации.">
+  <meta name="theme-color" content="#9333ea">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#faf5ff", 100: "#f3e8ff", 200: "#e9d5ff", 300: "#d8b4fe",
+              400: "#c084fc", 500: "#a855f7", 600: "#9333ea", 700: "#7e22ce",
+              800: "#6b21a8", 900: "#581c87"
+            }
+          },
+          fontFamily: {
+            sans: ["Manrope", "Inter", "Segoe UI", "system-ui", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body data-page="index">
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="index.html" aria-label="GO Support — на главную">
+        <img src="assets/img/logo.png" alt="" width="38" height="38">
+        <span>GO <b>Support</b></span>
+      </a>
+      <a class="btn-primary btn-compact" href="create.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        <span class="btn-label-full">Оставить обращение</span>
+        <span class="btn-label-short">Оставить</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <span class="eyebrow">GO Support · центр помощи</span>
+      <h1 class="hero-title">Обращения, которые<br><span class="text-gradient">не остаются без ответа</span></h1>
+      <p class="hero-sub">
+        Ищите по уже опубликованным заявкам или оставьте свою. Мы отвечаем и публикуем
+        обращения только с согласия авторов.
+      </p>
+
+      <div class="search-shell">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m16.5 16.5 4 4"/>
+        </svg>
+        <input id="search" class="search-input" type="search" placeholder="Поиск: тема, текст или автор…"
+               autocomplete="off" aria-label="Поиск обращений">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+
+      <div class="filters">
+        <div id="status-filters" class="filter-pills" role="group" aria-label="Фильтр по статусу"></div>
+
+        <div class="filter-row">
+          <div class="select-wrap">
+            <select id="project-filter" class="project-select" aria-label="Фильтр по проекту">
+              <option value="all">Все проекты</option>
+            </select>
+            <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </div>
+          <span id="count" class="result-count" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="feed-section" aria-label="Список обращений">
+      <div id="feed" class="feed">
+        <div class="skeleton-card" aria-hidden="true">
+          <span class="skeleton line w-24"></span>
+          <span class="skeleton line w-2/3 tall"></span>
+          <span class="skeleton line w-full"></span>
+          <span class="skeleton line w-5/6"></span>
+        </div>
+        <div class="skeleton-card" aria-hidden="true">
+          <span class="skeleton line w-24"></span>
+          <span class="skeleton line w-1/2 tall"></span>
+          <span class="skeleton line w-full"></span>
+          <span class="skeleton line w-2/3"></span>
+        </div>
+      </div>
+
+      <div id="empty" class="state-box" hidden>
+        <div class="state-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m16.5 16.5 4 4M8.5 11h5"/>
+          </svg>
+        </div>
+        <h2>Ничего не найдено</h2>
+        <p>Попробуйте изменить запрос, статус или проект.</p>
+        <a class="btn-ghost" href="create.html">Оставить своё обращение</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>© <span id="year">2026</span> GO Support</span>
+      <span class="footer-note">Обращения публикуются только с согласия авторов</span>
+      <a href="https://github.com/Doinwor/go-support" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="noscript">Для работы ленты обращений включите JavaScript.</p>
+  </noscript>
+</body>
+</html>

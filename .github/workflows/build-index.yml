@@ -1,0 +1,82 @@
+name: build-index
+
+on:
+  push:
+    paths:
+      - "website/data/tickets/**"
+      - ".github/workflows/build-index.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-index
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rebuild website/data/index.json
+        run: |
+          node <<'EOF'
+          const fs = require("fs");
+          const path = require("path");
+
+          const dataDir = path.join("website", "data");
+          const ticketsDir = path.join(dataDir, "tickets");
+
+          const files = fs.existsSync(ticketsDir)
+            ? fs.readdirSync(ticketsDir).filter((f) => f.endsWith(".json"))
+            : [];
+
+          const entries = [];
+          for (const file of files) {
+            try {
+              const ticket = JSON.parse(fs.readFileSync(path.join(ticketsDir, file), "utf8"));
+              const text = String(ticket.text || "").replace(/\s+/g, " ").trim();
+
+              entries.push({
+                id: ticket.id || file.replace(/\.json$/, ""),
+                date: ticket.date || "",
+                author: ticket.author || "Аноним",
+                title: ticket.title || "Без темы",
+                scope: ticket.scope || "",
+                project_label: ticket.project_label || "",
+                status: ticket.status || "open",
+                excerpt: text.length > 180 ? text.slice(0, 177).trimEnd() + "…" : text,
+              });
+            } catch (err) {
+              console.warn(`skip ${file}: ${err.message}`);
+            }
+          }
+
+          entries.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+
+          fs.writeFileSync(
+            path.join(dataDir, "index.json"),
+            JSON.stringify(entries, null, 2) + "\n",
+            "utf8"
+          );
+          console.log(`index.json: ${entries.length} ticket(s)`);
+          EOF
+
+      - name: Commit index.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add website/data/index.json
+          if git diff --cached --quiet; then
+            echo "index.json is up to date"
+          else
+            git commit -m "chore: rebuild index.json"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

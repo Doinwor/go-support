@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Обращение — GO Support</title>
+  <meta name="description" content="Обращение в поддержку GO и ответ администрации.">
+  <meta name="theme-color" content="#9333ea">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#faf5ff", 100: "#f3e8ff", 200: "#e9d5ff", 300: "#d8b4fe",
+              400: "#c084fc", 500: "#a855f7", 600: "#9333ea", 700: "#7e22ce",
+              800: "#6b21a8", 900: "#581c87"
+            }
+          },
+          fontFamily: {
+            sans: ["Manrope", "Inter", "Segoe UI", "system-ui", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body data-page="ticket">
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="index.html" aria-label="GO Support — на главную">
+        <img src="assets/img/logo.png" alt="" width="38" height="38">
+        <span>GO <b>Support</b></span>
+      </a>
+      <a class="btn-primary btn-compact" href="create.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        <span class="btn-label-full">Оставить обращение</span>
+        <span class="btn-label-short">Оставить</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page page-narrow">
+    <a class="back-link" href="index.html">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M11 18l-6-6 6-6"/>
+      </svg>
+      К списку обращений
+    </a>
+
+    <div id="ticket" aria-live="polite">
+      <div class="detail-skeleton" aria-hidden="true">
+        <span class="skeleton line w-28"></span>
+        <span class="skeleton line w-3/4 taller"></span>
+        <span class="skeleton line w-full"></span>
+        <span class="skeleton line w-full"></span>
+        <span class="skeleton line w-2/3"></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>© <span id="year">2026</span> GO Support</span>
+      <span class="footer-note">Обращения публикуются только с согласия авторов</span>
+      <a href="https://github.com/Doinwor/go-support" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="noscript">Для просмотра обращения включите JavaScript.</p>
+  </noscript>
+</body>
+</html>
