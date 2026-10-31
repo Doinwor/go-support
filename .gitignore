@@ -1,0 +1,11 @@
+# Админка хранится только локально и не публикуется в репозитории
+admin-app/
+
+# Секреты
+**/config.json
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
