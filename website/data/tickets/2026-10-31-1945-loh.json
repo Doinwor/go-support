@@ -7,5 +7,11 @@
   "text": "ВЫ ДОЛБОЕБЫ",
   "screenshot": "",
   "date": "2026-10-31T19:45:47",
-  "status": "open"
+  "status": "answered",
+  "admin_reply": {
+    "text": "Полшкл нахуй",
+    "date": "2026-10-31T19:46:39",
+    "admin_name": "Главный Админ",
+    "admin_avatar": "assets/img/logo.png"
+  }
 }
