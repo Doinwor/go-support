@@ -12,7 +12,8 @@
        "https://docs.google.com/forms/d/e/1FAIpQLS.../viewform?embedded=true";
      Пока строка пустая — на странице create.html показывается заглушка.
      ------------------------------------------------------------------ */
-  const FORM_EMBED_URL = "";
+  const FORM_EMBED_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSdaliUo92TRAlaidaUg94oxZnKSibuCVSSAJPOtxrjyM_6H_Q/viewform?embedded=true";
 
   const STATUS = {
     open: { label: "Открыто", cls: "badge-open" },
