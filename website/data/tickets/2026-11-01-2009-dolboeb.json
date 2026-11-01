@@ -7,5 +7,11 @@
   "text": "Я TV VFVE",
   "screenshot": "",
   "date": "2026-11-01T20:09:23",
-  "status": "open"
+  "status": "answered",
+  "admin_reply": {
+    "text": "ПОШКЛ НАХУЙ",
+    "date": "2026-11-01T20:12:57",
+    "admin_name": "Главный Админ",
+    "admin_avatar": "assets/img/logo.png"
+  }
 }
